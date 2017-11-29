@@ -3,6 +3,7 @@
 #include ros/ros.h
 #include //hier einfügen
 
+//Client um von Service Daten zu empfangen
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "client_name");
@@ -14,8 +15,7 @@ int main(int argc, char **argv)
 
 
 
-ros::ServiceClient _subTaskVectorClient = _nh->serviceClient<youbot_msgs::pop_subTaskVector>("subTask");youbot_msgs::pop_subTaskVector 
-srv;
+  ros::ServiceClient _subTaskVectorClient = _nh->serviceClient<youbot_msgs::pop_subTaskVector>("subTask");youbot_msgs::pop_subTaskVector srv;
 
 if (_subTaskVectorClient.call(srv))
 {  
