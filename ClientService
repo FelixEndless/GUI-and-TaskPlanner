@@ -1,0 +1,8 @@
+ros::ServiceClient _subTaskVectorClient = _nh->serviceClient<youbot_msgs::pop_subTaskVector>("subTask");youbot_msgs::pop_subTaskVector 
+srv;
+
+if (_subTaskVectorClient.call(srv))
+{  
+//success the subtask vector is in:  
+youbot_msgs::SubTaskVector subTasks = srv.response.subTasks; 
+}
