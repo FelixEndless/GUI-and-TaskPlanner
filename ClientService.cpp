@@ -3,7 +3,7 @@
 #include ros/ros.h
 #include //hier einfügen
 
-//Client um von Service Daten zu empfangen
+
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "client_name");
