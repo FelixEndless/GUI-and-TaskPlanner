@@ -1,3 +1,8 @@
+//wir benötigen noch den header des Service File als #include
+
+#include ros/ros.h
+#include //hier einfügen
+
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "add_two_ints_client");
