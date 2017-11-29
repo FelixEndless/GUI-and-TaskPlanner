@@ -5,14 +5,12 @@
 
 int main(int argc, char **argv)
 {
-  ros::init(argc, argv, "add_two_ints_client");
-  if (argc != 3)
-  {
-    ROS_INFO("usage: add_two_ints_client X Y");
-    return 1;
-  }
+  ros::init(argc, argv, "client_name");
+ 
 
-  ros::NodeHandle n;
+  ros::NodeHandle n, _nh;
+  ros::Rate r(1);
+  ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
 
 
@@ -24,3 +22,6 @@ if (_subTaskVectorClient.call(srv))
 //success the subtask vector is in:  
 youbot_msgs::SubTaskVector subTasks = srv.response.subTasks; 
 }
+
+    marker_pub.publish(marker);
+  
