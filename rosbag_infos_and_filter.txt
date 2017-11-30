@@ -1,4 +1,4 @@
-// Liste von Topics die gerade gepublisht werden
+// Liste von Topics die gerade gepublished werden
 rostopic list -v
 
 //aus aufgenommenen .bag-File lesen was es enthält
