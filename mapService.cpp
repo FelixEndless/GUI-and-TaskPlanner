@@ -80,23 +80,17 @@ int main(int argc, char **argv)
 			  subTaskTextArr[i].action = visualization_msgs::Marker::ADD;
 			  subTaskTextArr[i].pose.position.x = subTasks.subtasks.at(i).poseNew.position.x;
 			  subTaskTextArr[i].pose.position.y = subTasks.subtasks.at(i).poseNew.position.y;
+			  subTaskTextArr[i].pose.position.z = subTasks.subtasks.at(i).poseNew.position.z+0.4;
 			  for(int j=0;j<i;j++)
 			  {
+
 				  if(subTaskTextArr[i].pose.position.x==subTaskTextArr[j].pose.position.x && subTaskTextArr[i].pose.position.y==subTaskTextArr[j].pose.position.y)
 				  {
-					  same_pos=true;
-					  same_pos_nr=j;
-					  //ROS_INFO("Same position.\n");
+					  ROS_INFO("i=[%d], j=[%d]", i, j);
+					  subTaskTextArr[i].pose.position.z = subTaskTextArr[i].pose.position.z+0.15;
 				  }
 			  }
-			  if(same_pos)
-			  {
-				  subTaskTextArr[i].pose.position.z = subTasks.subtasks.at(same_pos_nr).poseNew.position.z+0.4;
-			  }
-			  else
-			  {
-				  subTaskTextArr[i].pose.position.z = subTasks.subtasks.at(i).poseNew.position.z+0.4;
-			  }
+
 			  subTaskTextArr[i].pose.orientation.x = 0.0;
 			  subTaskTextArr[i].pose.orientation.y = 0.0;
 			  subTaskTextArr[i].pose.orientation.z = 0.0;
@@ -112,13 +106,13 @@ int main(int argc, char **argv)
 			  std::ostringstream ss;
 			  ss << i;
 
-			  subTaskTextArr[i].text = ss.str() + std::string(". ") + subTasks.subtasks.at(i).subTasktType.c_str();
+			  subTaskTextArr[i].text = ss.str() + std::string(". ") + subTasks.subtasks.at(i).subTasktType.c_str() + std::string(" ") + subTasks.subtasks.at(i).objectType.c_str();
 
 		 	  //ROS_INFO("Nr. [%d] The X Position is: [%f]", i, srv.response.subTasks.subtasks.at(i).poseNew.position.x);
 		 	  //ROS_INFO("Object Type: [%s]", srv.response.subTasks.subtasks.at(i).objectType.c_str());
 		 	  marker_pub.publish(subTaskTextArr[i]);
 		 	  i++;
-		 	 same_pos=false;
+
 		 }
 
 		//subTaskText.text = subTasks.subtasks.at(0).subTasktType.c_str();
