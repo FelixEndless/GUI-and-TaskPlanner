@@ -30,14 +30,12 @@ int main(int argc, char **argv)
   ros::NodeHandle n, _nh;
   ros::Rate r(10);
   ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
-  int i=0, same_pos_nr;
-  bool same_pos=false;
 
   ros::ServiceClient _subTaskVectorClient = _nh.serviceClient<youbot_msgs::pop_subTaskVector>("subTask");
   youbot_msgs::pop_subTaskVector srv;
   while (ros::ok())
 {
-	ros::spinOnce();
+
 	visualization_msgs::Marker subTaskText;
     subTaskText.type = Marker::TEXT_VIEW_FACING;
 	subTaskText.header.frame_id = "/map";
@@ -69,7 +67,7 @@ int main(int argc, char **argv)
 		 visualization_msgs::Marker *subTaskTextArr;
 		 subTaskTextArr = new visualization_msgs::Marker[s];
 
-		 while(i<s)
+		 for(int i=0;i<s;i++)
 		 	   {
 
 			  subTaskTextArr[i].type = Marker::TEXT_VIEW_FACING;
@@ -86,7 +84,7 @@ int main(int argc, char **argv)
 
 				  if(subTaskTextArr[i].pose.position.x==subTaskTextArr[j].pose.position.x && subTaskTextArr[i].pose.position.y==subTaskTextArr[j].pose.position.y)
 				  {
-					  ROS_INFO("i=[%d], j=[%d]", i, j);
+					  //ROS_INFO("i=[%d], j=[%d]", i, j);
 					  subTaskTextArr[i].pose.position.z = subTaskTextArr[i].pose.position.z+0.15;
 				  }
 			  }
@@ -108,10 +106,10 @@ int main(int argc, char **argv)
 
 			  subTaskTextArr[i].text = ss.str() + std::string(". ") + subTasks.subtasks.at(i).subTasktType.c_str() + std::string(" ") + subTasks.subtasks.at(i).objectType.c_str();
 
-		 	  //ROS_INFO("Nr. [%d] The X Position is: [%f]", i, srv.response.subTasks.subtasks.at(i).poseNew.position.x);
+		 	  ROS_INFO("Nr. [%d] The X Position is: [%f]", i, srv.response.subTasks.subtasks.at(i).poseNew.position.x);
 		 	  //ROS_INFO("Object Type: [%s]", srv.response.subTasks.subtasks.at(i).objectType.c_str());
 		 	  marker_pub.publish(subTaskTextArr[i]);
-		 	  i++;
+
 
 		 }
 
